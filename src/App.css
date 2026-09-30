@@ -182,3 +182,15 @@
     border-right-color: var(--border);
   }
 }
+
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 180px);
+  gap: 30px 20px;
+
+  margin-top: 30px;
+}
+
+.empty-list {
+  margin-top: 30px;
+}

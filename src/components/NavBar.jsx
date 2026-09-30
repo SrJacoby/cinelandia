@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 function Navbar(){
     const [query, setQuery] = useState("")
@@ -23,10 +23,10 @@ function Navbar(){
             <h1>Cinelândia</h1>
 
             <div>
-                <a href="/">Início</a>
-                <a href="/">Filmes</a>
-                <a href="/">Listas</a>
-                <a href="/">Perfil</a>
+                <Link to="/">Início</Link>
+                <Link to="/">Filmes</Link>
+                <Link to="/lista">Listas</Link>
+                <Link to="/">Perfil</Link>
                 
                 <form onSubmit={handleSearch}>
                     <input 
