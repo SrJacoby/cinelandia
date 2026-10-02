@@ -7,6 +7,7 @@ import MovieCarousel from "./components/MovieCarousel";
 import MovieDetails from "./pages/MovieDetails";
 import SearchResults from "./pages/SearchResults";
 import Watchlist from "./pages/Watchlist";
+import WatchedMovies from "./pages/WatchedMovies";
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -53,6 +54,7 @@ function App() {
 
       <Route path="/filme/:id" element={<MovieDetails />}></Route>
       <Route path="/lista" element={<Watchlist />}></Route>
+      <Route path="/assistidos" element={<WatchedMovies />}></Route>
 
       <Route path="/busca" element={<SearchResults />}></Route>
     </Routes>
