@@ -26,7 +26,7 @@ function Navbar(){
                 <Link to="/">Início</Link>
                 <Link to="/">Filmes</Link>
                 <Link to="/lista">Listas</Link>
-                <Link to="/">Perfil</Link>
+                <Link to="/perfil">Perfil</Link>
                 
                 <form onSubmit={handleSearch}>
                     <input 

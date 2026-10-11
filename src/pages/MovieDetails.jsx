@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {getMovieDetails} from "../services/tmdb"
+import {isFavorite, toggleFavorite} from "../services/favorites";
 
 function MovieDetails(){
     const {id} = useParams()
@@ -9,6 +10,8 @@ function MovieDetails(){
     const [userRating, setUserRating] = useState(0)
     const [watched, setWatched] = useState(false)
     const [inWatchlist, setInWatchlist] = useState(false)
+    const [favorite, setFavorite] = useState(false);
+    const [favoriteMessage, setFavoriteMessage] = useState("");
 
     useEffect(() => {
         async function loadMovie(){
@@ -38,6 +41,9 @@ function MovieDetails(){
                 )
 
                 setInWatchlist(savedWatchlist === "true")
+
+                setFavorite(isFavorite(id));
+                setFavoriteMessage("");
 
             } catch (error){
                 console.error("Erro ao buscar detalhes do filme:", error)
@@ -92,6 +98,18 @@ function MovieDetails(){
             `cinelandia-watchlist-${id}`,
             newValue.toString()
         )
+    }
+
+    function handleFavorite() {
+        const result = toggleFavorite(id);
+
+        if (!result.success) {
+            setFavoriteMessage(result.message);
+            return;
+        }
+
+        setFavorite(result.isFavorite);
+        setFavoriteMessage("");
     }
     
     return (
@@ -170,7 +188,19 @@ function MovieDetails(){
                         >
                             {inWatchlist ? "✓ Na minha lista" : "+ Quero assistir"}
                         </button>
+                        <button
+                            type="button"
+                            className={`favorite-button ${favorite ? "active" : ""}`}
+                            onClick={handleFavorite}
+                            >
+                            {favorite ? "♥ Favorito" : "♡ Adicionar aos favoritos"}
+                        </button>
                     </div>
+                    {favoriteMessage && (
+                        <p className="favorite-message">
+                            {favoriteMessage}
+                        </p>
+                    )}
                 </div>
             </div>
         </main>

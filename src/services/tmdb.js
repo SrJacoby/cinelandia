@@ -49,4 +49,40 @@ export async function searchMovies(query){
     return response.data.results
 }
 
+export async function discoverMovies(params = {}) {
+  const response = await tmdb.get("/discover/movie", {
+    params: {
+      language: "pt-BR",
+      sort_by: "popularity.desc",
+      include_adult: false,
+      ...params,
+    },
+  });
+
+  return response.data.results;
+}
+
+export async function getTrendingMovies() {
+  const response = await tmdb.get("/trending/movie/week", {
+    params: {
+      language: "pt-BR",
+    },
+  });
+
+  return response.data.results;
+}
+
+export async function getMovieRecommendations(id) {
+  const response = await tmdb.get(
+    `/movie/${id}/recommendations`,
+    {
+      params: {
+        language: "pt-BR",
+      },
+    }
+  );
+
+  return response.data.results;
+}
+
 export default tmdb
